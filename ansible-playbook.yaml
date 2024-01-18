@@ -104,7 +104,7 @@
         owner: root
         group: root
         src: dhcpd.j2
-        dest: /tmp/dhcpd.conf
+        dest: /etc/dhcp/dhcpd.conf
 
     - name: write netplan config using jinja2
       ansible.builtin.template:
@@ -113,7 +113,7 @@
         owner: root
         group: root
         src: netplan-00-installer-config.j2
-        dest: /tmp/00-installer-config.yaml
+        dest: /etc/netplan/00-installer-config.yaml
 
     - name: write firewalld-policy config using jinja2
       ansible.builtin.template:
@@ -122,7 +122,7 @@
         owner: root
         group: root
         src: firewalld-policies-internet-access.j2
-        dest: /tmp/firewalld-policies-internet-access.xml
+        dest: /etc/firewalld/policies/firewalld-policies-internet-access.xml
 
 
 
