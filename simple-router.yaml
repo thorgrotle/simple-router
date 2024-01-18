@@ -20,7 +20,8 @@
   become_method: sudo
   vars:
     INTERNET_NIC: enp1s0
-    BRIDGE_NIC: enx00249b5100e0
+#    BRIDGE_NIC: enx00249b5100e0
+    BRIDGE_NIC: Primary
     HOST_NAME: rey
     TIMEZONE: "Europe/Copenhagen"
 
@@ -32,7 +33,7 @@
     VLAN1SUBNET: 10.0.24.0
     VLAN1DHCP_RANGE: "10.0.24.30 10.0.24.200"
     VLAN1DNS_DOMAIN: primary.lan
-    VLAN1DNS_INTERNAL: 10.0.24.1
+    VLAN1DNS_INTERNAL: 8.8.8.8
     VLAN1DNS_EXTERNAL1: 1.1.1.1
     VLAN1DNS_EXTERNAL2: 8.8.8.8
     VLAN1DNS_ROUTER: 10.0.24.1
