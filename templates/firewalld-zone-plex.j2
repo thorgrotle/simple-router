@@ -2,6 +2,8 @@
 <zone>
   <short>{{ VLAN4NAME }}</short>
   <description>Plex isolated network</description>
+  <service name="dhcp"/>
+  <service name="ntp"/>
   <interface name="{{ VLAN4NAME }}"/>
   <forward/>
 </zone>

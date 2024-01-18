@@ -22,6 +22,8 @@
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
     HOST_NAME: rey
+    TIMEZONE: Europe/Copenhagen
+
 
     #
     VLAN1: 1
@@ -35,6 +37,8 @@
     VLAN1DNS_EXTERNAL2: 8.8.8.8
     VLAN1DNS_ROUTER: 10.0.24.1
     VLAN1SERVICES: "DNS SSH"
+    VLAN1DNS_NTP: 10.0.24.1
+
     #
     VLAN2: 25
     VLAN2NAME: Guest
@@ -47,6 +51,7 @@
     VLAN2DNS_EXTERNAL2: 8.8.8.8
     VLAN2DNS_ROUTER: 10.0.25.1
     VLAN2SERVICES:
+    VLAN2DNS_NTP: 10.0.25.1
     #
 
     VLAN3: 26
@@ -58,8 +63,9 @@
     VLAN3DNS_INTERNAL: 8.8.8.8
     VLAN3DNS_EXTERNAL1: 8.8.8.8
     VLAN3DNS_EXTERNAL2: 8.8.8.8
-    VLAN3DNS_ROUTER: 10.0.27.1
+    VLAN3DNS_ROUTER: 10.0.26.1
     VLAN3SERVICES:
+    VLAN3DNS_NTP: 10.0.26.1
     #
 
 
@@ -74,7 +80,9 @@
     VLAN4DNS_EXTERNAL2: 8.8.8.8
     VLAN4DNS_ROUTER: 10.0.27.1
     VLAN4SERVICES:
+    VLAN4DNS_NTP: 10.0.27.1
     #
+
     VLAN5: 28
     VLAN5NAME: Management
     VLAN5DHCP_IP: 10.0.28.1
@@ -86,28 +94,17 @@
     VLAN5DNS_EXTERNAL2: 8.8.8.8
     VLAN5DNS_ROUTER: 10.0.28.1
     VLAN5SERVICES:
+    VLAN5DNS_NTP: 10.0.27.1
     #
 
-
-    NTPD_SERVERIP: 80
-    NTPD_EXTERNALSERVER1: "pool 0.ubuntu.pool.ntp.org iburst"
-    NTPD_EXTERNALSERVER2: "pool 1.ubuntu.pool.ntp.org iburst"
-    NTPD_EXTERNALSERVER3: "pool 2.ubuntu.pool.ntp.org iburst"
-    NTPD_EXTERNALSERVER4: "pool 3.ubuntu.pool.ntp.org iburst"
-#
-#    COCKPIT_ACCESSIP: 
-#
-#    WIREGUARD_CON_NAME: 80
-#    WIREGUARD_IP: 80
-#    WIREGUARD_PORT: 80
-#    WIREGUARD_VLAN: 80
-#    WIREGUARD_GENPRIVATEKEY: NO
-#    WIREGUARD_PRIVATEKEY: 80
-#    WIREGUARD_ALLOWEDNET: 80
 
 
   tasks:
     #- name: Run the equivalent of "apt update" as a separate step
+    - name: Set timezone
+      timezone:
+        name: {{ TIMEZONE }}    
+
 
     - name: APT update
       ansible.builtin.apt:
@@ -125,7 +122,7 @@
         - bridge-utils
         - firewalld
         - isc-dhcp-server
-        - ntp
+        - chrony
         - bind9
         - wireguard
         - unattended-upgrades
@@ -306,7 +303,7 @@
         src: bind.named.conf.options.j2
         dest: /etc/bind/named.conf.options
 
-    - name: write bind/primary.db using jinja2
+    - name: write bind/{{ VLAN1DNS_DOMAIN }} using jinja2
       ansible.builtin.template:
         backup: true
         mode: 0644
@@ -315,8 +312,32 @@
         src: bind.primary.db.j2
         dest: /etc/bind/{{ VLAN1DNS_DOMAIN }}
 
+    - name: write bind/{{ VLAN2DNS_DOMAIN }} using jinja2
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: bind.guest.db.j2
+        dest: /etc/bind/{{ VLAN2DNS_DOMAIN }}
 
+    - name: write bind/{{ VLAN5DNS_DOMAIN }} using jinja2
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: bind.management.db.j2
+        dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
 
+    - name: write chrony.conf (timeserver) using jinja2
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: bind.management.db.j2
+        dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
 
 #    - name: write firewalld-policies for IoT access config using jinja2
 #      ansible.builtin.template:

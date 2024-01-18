@@ -24,6 +24,7 @@ subnet {{ VLAN1SUBNET }} netmask 255.255.255.0{
   option domain-name "{{ VLAN1DNS_DOMAIN }}";
   option routers {{ VLAN1DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
+  option ntp-servers {{ VLAN1DNS_ROUTER }};
 }
 
 subnet {{ VLAN2SUBNET }} netmask 255.255.255.0{
@@ -32,6 +33,7 @@ subnet {{ VLAN2SUBNET }} netmask 255.255.255.0{
   option domain-name "{{ VLAN2DNS_DOMAIN }}";
   option routers {{ VLAN2DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
+  option ntp-servers {{ VLAN3DNS_ROUTER }};
 }
 
 subnet {{ VLAN3SUBNET }} netmask 255.255.255.0{
@@ -40,6 +42,7 @@ subnet {{ VLAN3SUBNET }} netmask 255.255.255.0{
   option domain-name "{{ VLAN3DNS_DOMAIN }}";
   option routers {{ VLAN3DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
+  option ntp-servers {{ VLAN3DNS_ROUTER }};
 }
 
 subnet {{ VLAN4SUBNET }} netmask 255.255.255.0{
@@ -48,6 +51,7 @@ subnet {{ VLAN4SUBNET }} netmask 255.255.255.0{
   option domain-name "{{ VLAN4DNS_DOMAIN }}";
   option routers {{ VLAN4DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
+  option ntp-servers {{ VLAN4DNS_ROUTER }};
 }
 
 subnet {{ VLAN5SUBNET }} netmask 255.255.255.0{
@@ -56,4 +60,5 @@ subnet {{ VLAN5SUBNET }} netmask 255.255.255.0{
   option domain-name "{{ VLAN5DNS_DOMAIN }}";
   option routers {{ VLAN5DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
+  option ntp-servers {{ VLAN5DNS_ROUTER }};
 }

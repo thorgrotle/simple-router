@@ -1,0 +1,20 @@
+$TTL 1h	; default TTL for zone
+$ORIGIN {{ VLAN2DNS_DOMAIN }}. ; base domain-name
+; Start of Authority RR defining the key characteristics of the zone (domain)
+@     	IN  	SOA   {{ HOST_NAME }}.{{ VLAN2DNS_DOMAIN }}. root.{{ VLAN2DNS_DOMAIN }}. (
+                            	2003080800 ; serial number
+                            	12h    	; refresh
+                            	15m    	; update retry
+                            	3w     	; expiry
+                            	2h     	; minimum
+                            	)
+; name server RR for the domain
+       	IN  	NS  	{{ HOST_NAME }}.{{ VLAN2DNS_DOMAIN }}.
+{{ HOST_NAME }}      	A   	{{ VLAN2DNS_ROUTER }}
+test            	A   	{{ VLAN2DNS_ROUTER }}
+
+
+
+
+
+
