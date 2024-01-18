@@ -351,9 +351,9 @@
         state: restarted
         enabled: true
 
-    - name: Enable kea-dhcp4
+    - name: Enable kea-dhcp4-server
       ansible.builtin.service:
-        name: kea-dhcp4
+        name: kea-dhcp4-server
         state: restarted
         enabled: true
 
