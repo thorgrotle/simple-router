@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <short>{{ VLAN1NAME }}</short>
+  <description>Primary network-all regular clients here.</description>
+  <service name="ssh"/>
+  <service name="mdns"/>
+  <service name="dns"/>
+  <service name="cockpit"/>
+  <service name="dhcp"/>
+  <interface name="{{ BRIDGE_NIC }}"/>
+  <forward/>
+</zone>

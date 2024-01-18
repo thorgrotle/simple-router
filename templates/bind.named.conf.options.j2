@@ -1,0 +1,9 @@
+options {
+	directory "/var/cache/bind";
+	 forwarders {
+	{{ VLAN1DNS_EXTERNAL1 }};
+	{{ VLAN1DNS_EXTERNAL2 }};
+	 };
+	dnssec-validation auto;
+	listen-on-v6 { none; };
+};

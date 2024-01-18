@@ -2,28 +2,36 @@
 network:
   version: 2
   ethernets:
-    {{ BRIDGE_NIC }}:
-      dhcp4: no
+    {{ BRIDGE_NIC }}: 
+      addresses: [{{ VLAN1DHCP_IP }}/24]
 
     {{ INTERNET_NIC }}:
-      dhcp4: no
-
-  bridges:
-    internet0:
-      interfaces: [{{ INTERNET_NIC }}]
       dhcp4: yes
-    lan0:
-      interfaces: [{{BRIDGE_NIC}}]
-      dhcp4: no
-      addresses: [{{LAN1DHCP_IP}}/24]
+
+#  bridges:
+#    lan0:
+#      interfaces: [{{BRIDGE_NIC}}]
+#      dhcp4: no
 
   vlans:
-    {{ VLAN1NAME }}:
-      id: {{ VLAN1 }}
-      link: lan0
-      addresses: [{{ VLAN1DHCP_IP }}/24]
+#    {{ VLAN1NAME }}:
+#      id: {{ VLAN1 }}
+#      link: {{ BRIDGE_NIC }}
+#      addresses: [{{ VLAN1DHCP_IP }}/24]
     {{ VLAN2NAME }}:
       id: {{ VLAN2 }}
-      link: lan0
+      link: {{ BRIDGE_NIC }}
       addresses: [{{VLAN2DHCP_IP }}/24]
+    {{ VLAN3NAME }}:
+      id: {{ VLAN3 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN3DHCP_IP }}/24]
+    {{ VLAN4NAME }}:
+      id: {{ VLAN4 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN4DHCP_IP }}/24]
+    {{ VLAN5NAME }}:
+      id: {{ VLAN5 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN5DHCP_IP }}/24]
       

@@ -6,26 +6,54 @@ one-lease-per-client true;
 allow booting;
 
 
-# Needed for bind9 DNS
+include "/etc/dhcp/rndc.key";
 
 
-include "/etc/dhcp/isc-dhcp-server-rndc.key";
-
-
-# SUBNET CONF - {{ LAN1NAME }}
-zone {{ LAN1DNS_DOMAIN }}. {
+# SUBNET CONF - {{ VLAN1NAME }}
+zone {{ VLAN1DNS_DOMAIN }}. {
 	primary 127.0.0.1;
 	key rndc-key; }
 
-ddns-updates on;
-ddns-update-style interim;
-update-static-leases on;
-use-host-decl-names on;
-subnet {{ LAN1SUBNET }} netmask 255.255.255.0{
-  range {{ LAN1DHCP_RANGE }};
-  option domain-name-servers {{ LAN1DNS_INTERNAL }};
-  option domain-name "{{ LAN1DNS_DOMAIN }}";
-  option routers {{ LAN1DNS_ROUTER }};
+subnet {{ VLAN1SUBNET }} netmask 255.255.255.0{
+#  ddns-updates on;
+#  ddns-update-style interim;
+#  update-static-leases on;
+  use-host-decl-names on;
+  range {{ VLAN1DHCP_RANGE }};
+  option domain-name-servers {{ VLAN1DNS_INTERNAL }};
+  option domain-name "{{ VLAN1DNS_DOMAIN }}";
+  option routers {{ VLAN1DNS_ROUTER }};
   option subnet-mask 255.255.255.0;
 }
 
+subnet {{ VLAN2SUBNET }} netmask 255.255.255.0{
+  range {{ VLAN2DHCP_RANGE }};
+  option domain-name-servers {{ VLAN2DNS_INTERNAL }};
+  option domain-name "{{ VLAN2DNS_DOMAIN }}";
+  option routers {{ VLAN2DNS_ROUTER }};
+  option subnet-mask 255.255.255.0;
+}
+
+subnet {{ VLAN3SUBNET }} netmask 255.255.255.0{
+  range {{ VLAN3DHCP_RANGE }};
+  option domain-name-servers {{ VLAN3DNS_INTERNAL }};
+  option domain-name "{{ VLAN3DNS_DOMAIN }}";
+  option routers {{ VLAN3DNS_ROUTER }};
+  option subnet-mask 255.255.255.0;
+}
+
+subnet {{ VLAN4SUBNET }} netmask 255.255.255.0{
+  range {{ VLAN4DHCP_RANGE }};
+  option domain-name-servers {{ VLAN4DNS_INTERNAL }};
+  option domain-name "{{ VLAN4DNS_DOMAIN }}";
+  option routers {{ VLAN4DNS_ROUTER }};
+  option subnet-mask 255.255.255.0;
+}
+
+subnet {{ VLAN5SUBNET }} netmask 255.255.255.0{
+  range {{ VLAN5DHCP_RANGE }};
+  option domain-name-servers {{ VLAN5DNS_INTERNAL }};
+  option domain-name "{{ VLAN5DNS_DOMAIN }}";
+  option routers {{ VLAN5DNS_ROUTER }};
+  option subnet-mask 255.255.255.0;
+}

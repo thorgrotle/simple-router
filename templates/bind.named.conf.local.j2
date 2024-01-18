@@ -1,0 +1,22 @@
+//include "/etc/bind/zones.rfc1918";
+include "/etc/bind/rndc.key";
+zone "{{ VLAN1DNS_DOMAIN }}" {
+allow-query { 127.0.0.0/24; {{ VLAN1SUBNET }}/24; {{ VLAN5SUBNET }}/24; 10.0.80.0/24; };
+type master;
+file "/etc/bind/{{ VLAN1DNS_DOMAIN }}";
+allow-update { key rndc-key; 127.0.0.1; };
+};
+
+zone "{{ VLAN2DNS_DOMAIN }}" {
+allow-query { 127.0.0.0/24; {{ VLAN2SUBNET }}/24; {{ VLAN5SUBNET }}/24; 10.0.80.0/24; };
+type master;
+file "/etc/bind/{{ VLAN2DNS_DOMAIN }}";
+allow-update { key rndc-key; 127.0.0.1; };
+};
+
+zone "{{ VLAN5DNS_DOMAIN }}" {
+allow-query { 127.0.0.0/24; {{ VLAN5SUBNET }}/24; 10.0.80.0/24; };
+type master;
+file "/etc/bind/{{ VLAN5DNS_DOMAIN }}";
+allow-update { key rndc-key; 127.0.0.1; };
+};
