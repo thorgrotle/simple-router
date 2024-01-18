@@ -336,11 +336,36 @@
         src: bind.management.db.j2
         dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
     
+    - name: restart netplan
+      command: sudo netplan apply
+
     - name: Enable firewalld
       ansible.builtin.service:
         name: firewalld
         state: restarted
         enabled: true
+
+    - name: Enable chronyd
+      ansible.builtin.service:
+        name: chronyd
+        state: restarted
+        enabled: true
+
+    - name: Enable kea-dhcp4
+      ansible.builtin.service:
+        name: kea-dhcp4
+        state: restarted
+        enabled: true
+
+    - name: Enable bind9
+      ansible.builtin.service:
+        name: bind9
+        state: restarted
+        enabled: true
+
+
+
+
 #      - name: Enable chronyd on systewm startup
 #        ansible.builtin.service:
 #          name: chronyd
