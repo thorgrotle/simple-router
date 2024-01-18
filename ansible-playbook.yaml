@@ -15,7 +15,7 @@
 
 
 #name: Simple Router Complete installer
-- hosts: 10.0.75.185
+- hosts: 10.0.75.161
   become: yes
   become_method: sudo
   vars:
@@ -24,7 +24,7 @@
     VLAN2_ENABLED: YES
     #
     INTERNET_NIC: enx00249b5100e0
-    BRIDGE_NIC: enp3s0
+    BRIDGE_NIC: enp1s0
     #
     LAN1NAME: LAN0
     LAN1SUBNET: 10.0.66.0
