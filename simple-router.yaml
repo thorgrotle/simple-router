@@ -20,8 +20,7 @@
   become_method: sudo
   vars:
     INTERNET_NIC: enp1s0
-#    BRIDGE_NIC: enx00249b5100e0
-    BRIDGE_NIC: Primary
+    BRIDGE_NIC: enx00249b5100e0
     HOST_NAME: rey
     TIMEZONE: "Europe/Copenhagen"
 
