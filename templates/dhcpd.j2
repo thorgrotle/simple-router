@@ -1,0 +1,31 @@
+# Ansible Configuration
+authoritative;
+default-lease-time 1440;
+max-lease-time 10080;
+one-lease-per-client true;
+allow booting;
+
+
+# Needed for bind9 DNS
+
+
+include "/etc/dhcp/isc-dhcp-server-rndc.key";
+
+
+# SUBNET CONF - {{ LAN1NAME }}
+zone {{ LAN1DNS_DOMAIN }}. {
+	primary 127.0.0.1;
+	key rndc-key; }
+
+ddns-updates on;
+ddns-update-style interim;
+update-static-leases on;
+use-host-decl-names on;
+subnet {{ LAN1SUBNET }} netmask 255.255.255.0{
+  range {{ LAN1DHCP_RANGE }};
+  option domain-name-servers {{ LAN1DNS_INTERNAL }};
+  option domain-name "{{ LAN1DNS_DOMAIN }}";
+  option routers {{ LAN1DNS_ROUTER }};
+  option subnet-mask 255.255.255.0;
+}
+
