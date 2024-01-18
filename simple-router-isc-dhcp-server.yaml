@@ -121,7 +121,8 @@
         - vlan
         - bridge-utils
         - firewalld
-        - isc-dhcp-server
+        - kea
+        - kea
         - chrony
         - bind9
         - wireguard
@@ -140,35 +141,38 @@
         state: absent
 
 
-
+#    - name: Install a list of for VM
+#      ansible.builtin.apt:
+#        pkg:
+#        - openvswitch-switch-dpdk
     
 
-#    - name: Copy bind/rndc.key to dhcp/rndc.key
-#      ansible.builtin.copy:
-#        remote_src: true
-#        src: /etc/bind/rndc.key
-#        dest: /etc/dhcp/rndc.key
-#        owner: root
-#        group: root
-#        mode: '0640'
+    - name: Copy bind/rndc.key to dhcp/rndc.key
+      ansible.builtin.copy:
+        remote_src: true
+        src: /etc/bind/rndc.key
+        dest: /etc/dhcp/rndc.key
+        owner: root
+        group: root
+        mode: '0640'
 
-#    - name: write dhcpd config using jinja2
-##      ansible.builtin.template:
-#        backup: true
-#        mode: 0644
-#        owner: root
-#        group: root
-#        src: dhcpd.j2
-#        dest: /etc/dhcp/dhcpd.conf
+    - name: write dhcpd config using jinja2
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: dhcpd.j2
+        dest: /etc/dhcp/dhcpd.conf
 
-#    - name: write default/isc-dhcp-server for DHCP access to all networks
-#      ansible.builtin.template:
-#        backup: true
-#        mode: 0644
-#        owner: root
-#        group: root
-#        src: default-isc-dhcp-server.j2
-#        dest: /etc/default/isc-dhcp-server
+    - name: write default/isc-dhcp-server for DHCP access to all networks
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: default-isc-dhcp-server.j2
+        dest: /etc/default/isc-dhcp-server
 
 
 
