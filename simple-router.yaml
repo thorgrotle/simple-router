@@ -26,7 +26,7 @@
 
 
     #
-    VLAN1: 1
+    VLAN1: 24
     VLAN1NAME: Primary
     VLAN1DHCP_IP: 10.0.24.1
     VLAN1SUBNET: 10.0.24.0
