@@ -133,8 +133,9 @@
         - nano
         - wireguard
         - qrencode
-#        - neofetch
-#        - traceroute
+        - neofetch
+        - traceroute
+        - openvswitch-switch-dpdk
 
     - name: Remove UFW
       ansible.builtin.apt:
@@ -142,10 +143,10 @@
         state: absent
 
 
-    - name: Install a list of for VM
-      ansible.builtin.apt:
-        pkg:
-        - openvswitch-switch-dpdk
+#    - name: Install a list of for VM
+#      ansible.builtin.apt:
+#        pkg:
+#        - openvswitch-switch-dpdk
     
 
     - name: Copy bind/rndc.key to dhcp/rndc.key
