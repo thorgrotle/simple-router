@@ -1,0 +1,43 @@
+{
+  "Dhcp4": {
+        "interfaces-config": {
+        "interfaces": [ "enx00249b5100e0" ]
+        },
+        "control-socket": {
+        "socket-type": "unix",
+        "socket-name": "/run/kea/kea4-ctrl-socket"
+        },
+        "lease-database": {
+        "type": "memfile",
+        "lfc-interval": 3600
+        },
+        "valid-lifetime": 600,
+        "max-valid-lifetime": 7200,
+        "subnet4": [
+        {
+        "id": 1,
+        "subnet": "10.0.24.0/24",
+        "pools": [
+        {
+                "pool": "10.0.24.150 - 10.0.24.200"
+        }
+        ],
+        "option-data": [
+        {
+                "name": "routers",
+                "data": "10.0.24.1"
+        },
+        {
+                "name": "domain-name-servers",
+                "data": "10.0.24.1"
+        },
+        {
+                "name": "domain-name",
+                "data": "primary.lan"
+        }
+        ]
+        }
+        ]
+  }
+}
+

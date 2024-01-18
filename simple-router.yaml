@@ -152,14 +152,14 @@
 #        group: root
 #        mode: '0640'
 
-#    - name: write dhcpd config using jinja2
-##      ansible.builtin.template:
-#        backup: true
-#        mode: 0644
-#        owner: root
-#        group: root
-#        src: dhcpd.j2
-#        dest: /etc/dhcp/dhcpd.conf
+    - name: write kea-dhcp.conf config using jinja2
+      ansible.builtin.template:
+        backup: true
+        mode: 0644
+        owner: root
+        group: root
+        src: kea-dhcp4.conf.j2
+        dest: /etc/kea/kea-dhcp4.conf
 
 #    - name: write default/isc-dhcp-server for DHCP access to all networks
 #      ansible.builtin.template:
@@ -335,6 +335,19 @@
         group: root
         src: bind.management.db.j2
         dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+
+      - name: Enable firewalld on systewm startup
+        ansible.builtin.service:
+          name: firewalld
+          enabled: yes
+          state: restarted
+
+      - name: Enable chronyd on systewm startup
+        ansible.builtin.service:
+          name: chronyd
+          enabled: yes
+          state: restarted
+
 
 #    - name: write firewalld-policies for IoT access config using jinja2
 #      ansible.builtin.template:
