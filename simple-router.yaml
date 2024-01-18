@@ -335,7 +335,11 @@
         group: root
         src: bind.management.db.j2
         dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
-
+    
+    - name: Enable firewalld
+        ansible.builtin.service:
+        name: firewalld
+        state: restarted
 #      - name: Enable chronyd on systewm startup
 #        ansible.builtin.service:
 #          name: chronyd
