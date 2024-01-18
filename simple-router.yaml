@@ -103,7 +103,7 @@
     #- name: Run the equivalent of "apt update" as a separate step
     - name: Set timezone
       timezone:
-        name: {{ TIMEZONE }}    
+        name: {{ TIMEZONE }}
 
 
     - name: APT update
