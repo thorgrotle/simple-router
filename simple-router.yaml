@@ -121,7 +121,7 @@
         - vlan
         - bridge-utils
         - firewalld
-        - isc-dhcp-server
+        - kea
         - chrony
         - bind9
         - wireguard
