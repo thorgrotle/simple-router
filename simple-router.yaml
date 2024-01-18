@@ -19,8 +19,8 @@
   become: yes
   become_method: sudo
   vars:
-    INTERNET_NIC: enx00249b5100e0
-    BRIDGE_NIC: enp1s0
+    INTERNET_NIC: enp1s0
+    BRIDGE_NIC: enx00249b5100e0
     HOST_NAME: rey
 
     #
