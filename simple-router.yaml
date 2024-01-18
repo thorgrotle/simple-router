@@ -133,6 +133,7 @@
         - neofetch
         - traceroute
         - openvswitch-switch-dpdk
+        - network-manager
 
     - name: Remove UFW
       ansible.builtin.apt:
@@ -180,7 +181,7 @@
         mode: 0600
         owner: root
         group: root
-        src: netplan-00-installer-config.j2
+        src: netplan-00-installer-config2.j2
         dest: /etc/netplan/00-installer-config.yaml
 
 
