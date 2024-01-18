@@ -339,14 +339,14 @@
       - name: Enable firewalld on systewm startup
         ansible.builtin.service:
           name: firewalld
-          enabled: yes
-          state: restarted
+            enabled: yes
+            state: restarted
 
       - name: Enable chronyd on systewm startup
         ansible.builtin.service:
           name: chronyd
-          enabled: yes
-          state: restarted
+            enabled: yes
+            state: restarted
 
 
 #    - name: write firewalld-policies for IoT access config using jinja2
