@@ -1,0 +1,39 @@
+# Ansible defined configuration
+network:
+  version: 2
+  ethernets:
+    {{ BRIDGE_NIC }}: 
+      dhcp4: no
+
+#      addresses: [{{ VLAN1DHCP_IP }}/24]
+
+    {{ INTERNET_NIC }}:
+      dhcp4: yes
+
+#  bridges:
+#    lan0:
+#      interfaces: [{{BRIDGE_NIC}}]
+#      dhcp4: no
+
+  vlans:
+    {{ VLAN1NAME }}:
+      id: {{ VLAN1 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{ VLAN1DHCP_IP }}/24]
+    {{ VLAN2NAME }}:
+      id: {{ VLAN2 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN2DHCP_IP }}/24]
+    {{ VLAN3NAME }}:
+      id: {{ VLAN3 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN3DHCP_IP }}/24]
+    {{ VLAN4NAME }}:
+      id: {{ VLAN4 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN4DHCP_IP }}/24]
+    {{ VLAN5NAME }}:
+      id: {{ VLAN5 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{VLAN5DHCP_IP }}/24]
+      
