@@ -38,7 +38,7 @@
     dest: /etc/bind/{{ VLAN1DNS_DOMAIN }}
 
 - name: write bind/{{ VLAN2DNS_DOMAIN }} using jinja2
-   ansible.builtin.template:
+  ansible.builtin.template:
     backup: true
     mode: 0644
     owner: root
