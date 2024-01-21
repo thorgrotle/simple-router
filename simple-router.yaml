@@ -20,7 +20,7 @@
   become_method: sudo
   roles:
   #  kea-dhcp
-    packages
+  - packages
   vars:
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
