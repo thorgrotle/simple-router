@@ -1,0 +1,10 @@
+---
+
+- name: write kea-dhcp.conf config using jinja2
+   ansible.builtin.template:
+    backup: true
+     mode: 0644
+     owner: root
+     group: root
+     src: kea-dhcp4.multi.conf.j2
+     dest: /etc/kea/kea-dhcp4.conf
