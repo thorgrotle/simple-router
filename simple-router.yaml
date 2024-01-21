@@ -19,7 +19,7 @@
   become: yes
   become_method: sudo
   roles:
-    kea-dhcp
+  #  kea-dhcp
     packages
   vars:
     INTERNET_NIC: enp1s0
