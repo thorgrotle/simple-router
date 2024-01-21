@@ -18,6 +18,22 @@
 - hosts: 10.0.75.161
   become: yes
   become_method: sudo
+  tasks:
+    #- name: Run the equivalent of "apt update" as a separate step
+    - name: "Set timezone"
+      timezone:
+        name: "{{ TIMEZONE }}"
+
+    - name: APT update
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: "update hostnames"
+      hostname:
+        name: "{{ HOST_NAME }}"
+
+  
+  
   roles:
   - packages
   - network
@@ -105,20 +121,7 @@
 
 
 
-  tasks:
-    #- name: Run the equivalent of "apt update" as a separate step
-    - name: "Set timezone"
-      timezone:
-        name: "{{ TIMEZONE }}"
-
-
-    - name: APT update
-      ansible.builtin.apt:
-        update_cache: true
-
-    - name: "update hostnames"
-      hostname:
-        name: "{{ HOST_NAME }}"
+  
 
 #  #- Install applications needed for router
   #  - name: Install a list of packages
