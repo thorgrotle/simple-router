@@ -21,7 +21,7 @@
   roles:
   - packages
   - kea-dhcp
-  
+
   vars:
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
@@ -117,7 +117,7 @@
       hostname:
         name: "{{ HOST_NAME }}"
 
-  #  #- Install applications needed for router
+#  #- Install applications needed for router
   #  - name: Install a list of packages
   #    ansible.builtin.apt:
   #      pkg:
@@ -146,35 +146,36 @@
 
 
     
+#
+ #    - name: Copy bind/rndc.key to dhcp/rndc.key
+ #      ansible.builtin.copy:
+ #        remote_src: true
+ #        src: /etc/bind/rndc.key
+ #        dest: /etc/dhcp/rndc.key
+ #        owner: root
+ #        group: root
+ #        mode: '0640'
 
-#    - name: Copy bind/rndc.key to dhcp/rndc.key
-#      ansible.builtin.copy:
-#        remote_src: true
-#        src: /etc/bind/rndc.key
-#        dest: /etc/dhcp/rndc.key
-#        owner: root
-#        group: root
-#        mode: '0640'
 
+# 
+ #    - name: write kea-dhcp.conf config using jinja2
+ #      ansible.builtin.template:
+ #        backup: true
+ #        mode: 0644
+ #        owner: root
+ #        group: root
+ #        src: kea-dhcp4.multi.conf.j2
+ #        dest: /etc/kea/kea-dhcp4.conf
 
-
-#    - name: write kea-dhcp.conf config using jinja2
-#      ansible.builtin.template:
-#        backup: true
-#        mode: 0644
-#        owner: root
-#        group: root
-#        src: kea-dhcp4.multi.conf.j2
-#        dest: /etc/kea/kea-dhcp4.conf
-
-#    - name: write default/isc-dhcp-server for DHCP access to all networks
-#      ansible.builtin.template:
-#        backup: true
-#        mode: 0644
-#        owner: root
-#        group: root
-#        src: default-isc-dhcp-server.j2
-#        dest: /etc/default/isc-dhcp-server
+#
+ #    - name: write default/isc-dhcp-server for DHCP access to all networks
+ #      ansible.builtin.template:
+ #        backup: true
+ #        mode: 0644
+ #        owner: root
+ #        group: root
+ #        src: default-isc-dhcp-server.j2
+ #        dest: /etc/default/isc-dhcp-server
 
 
 # Netplan install

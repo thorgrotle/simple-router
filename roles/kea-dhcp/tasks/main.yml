@@ -1,5 +1,4 @@
 ---
-
 - name: write kea-dhcp.conf config using jinja2
    ansible.builtin.template:
     backup: true
