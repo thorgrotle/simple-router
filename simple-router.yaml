@@ -19,8 +19,8 @@
   become: yes
   become_method: sudo
   roles:
-  #  kea-dhcp
-  #- packages
+  - packages
+  -  kea-dhcp
   vars:
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
@@ -137,10 +137,10 @@
   #      - openvswitch-switch-dpdk
   #      - network-manager
 
-    - name: Remove UFW
-      ansible.builtin.apt:
-        name: ufw
-        state: absent
+  #  - name: Remove UFW
+  #    ansible.builtin.apt:
+  #      name: ufw
+  #      state: absent
 
 
 
