@@ -20,7 +20,7 @@
   become_method: sudo
   roles:
   #  kea-dhcp
-  - packages
+  #- packages
   vars:
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
@@ -116,26 +116,26 @@
       hostname:
         name: "{{ HOST_NAME }}"
 
-    #- Install applications needed for router
-    - name: Install a list of packages
-      ansible.builtin.apt:
-        pkg:
-        - vlan
-        - bridge-utils
-        - firewalld
-        - kea
-        - chrony
-        - bind9
-        - wireguard
-        - unattended-upgrades
-        - cockpit
-        - nano
-        - wireguard
-        - qrencode
-        - neofetch
-        - traceroute
-        - openvswitch-switch-dpdk
-        - network-manager
+  #  #- Install applications needed for router
+  #  - name: Install a list of packages
+  #    ansible.builtin.apt:
+  #      pkg:
+  #      - vlan
+  #      - bridge-utils
+  #      - firewalld
+  #      - kea
+  #      - chrony
+  #      - bind9
+  #      - wireguard
+  #      - unattended-upgrades
+  #      - cockpit
+  #      - nano
+  #      - wireguard
+  #      - qrencode
+  #      - neofetch
+  #      - traceroute
+  #      - openvswitch-switch-dpdk
+  #      - network-manager
 
     - name: Remove UFW
       ansible.builtin.apt:
