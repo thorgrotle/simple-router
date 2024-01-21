@@ -23,6 +23,7 @@
   - network
   - firewalld
   - kea-dhcp
+  - bind9
 
   vars:
     INTERNET_NIC: enp1s0
@@ -280,70 +281,65 @@
   #      dest: /etc/firewalld/policies/internet-access.xml
 
 # Bind9 DNS Server configs
-    - name: write bind/named.conf using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.named.conf.j2
-        dest: /etc/bind/named.conf
-
-
-    - name: write bind/named.conf.options using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.named.conf.local.j2
-        dest: /etc/bind/named.conf.local
-
-    - name: write bind/named.conf.options using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.named.conf.options.j2
-        dest: /etc/bind/named.conf.options
-
-    - name: write bind/{{ VLAN1DNS_DOMAIN }} using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.primary.db.j2
-        dest: /etc/bind/{{ VLAN1DNS_DOMAIN }}
-
-    - name: write bind/{{ VLAN2DNS_DOMAIN }} using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.guest.db.j2
-        dest: /etc/bind/{{ VLAN2DNS_DOMAIN }}
-
-    - name: write bind/{{ VLAN5DNS_DOMAIN }} using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.management.db.j2
-        dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+  #  - name: write bind/named.conf using jinja2
+  #    ansible.builtin.template:
+  #      backup: true
+  #      mode: 0644
+  #      owner: root
+  #      group: root
+  #      src: bind.named.conf.j2
+  #      dest: /etc/bind/named.conf
+  #  - name: write bind/named.conf.options using jinja2
+  #    ansible.builtin.template:
+  #      backup: true
+  #      mode: 0644
+  #      owner: root
+  #      group: root
+  #      src: bind.named.conf.local.j2
+  #      dest: /etc/bind/named.conf.local
+  #  - name: write bind/named.conf.options using jinja2
+  #    ansible.builtin.template:
+  #      backup: true
+  #      mode: 0644
+  #      owner: root
+  #      group: root
+  #      src: bind.named.conf.options.j2
+  #      dest: /etc/bind/named.conf.options
+  #  - name: write bind/{{ VLAN1DNS_DOMAIN }} using jinja2
+  #    ansible.builtin.template:
+  #      backup: true
+  #      mode: 0644
+  #      owner: root
+  #      group: root
+   #     src: bind.primary.db.j2
+  #      dest: /etc/bind/{{ VLAN1DNS_DOMAIN }}
+  #
+  #  - name: write bind/{{ VLAN2DNS_DOMAIN }} using jinja2
+  #    ansible.builtin.template:
+  #      backup: true
+  #      mode: 0644
+  #      owner: root
+  #      group: root
+   #     src: bind.guest.db.j2
+  #      dest: /etc/bind/{{ VLAN2DNS_DOMAIN }}
+    #- name: write bind/{{ VLAN5DNS_DOMAIN }} using jinja2
+    #  ansible.builtin.template:
+    #    backup: true
+    #    mode: 0644
+    #    owner: root
+    #    group: root
+    #    src: bind.management.db.j2
+    #    dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
 
 # ChronyD configuration files
-    - name: write chrony.conf (timeserver) using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: bind.management.db.j2
-        dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+ #   - name: write chrony.conf (timeserver) using jinja2
+ #     ansible.builtin.template:
+ #       backup: true
+ #       mode: 0644
+ #       owner: root
+ #       group: root
+ #       src: bind.management.db.j2
+ #       dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
     
 # Restart netplan
   #  - name: restart netplan
@@ -357,11 +353,11 @@
   #      state: restarted
   #      enabled: true
 
-    - name: Enable chronyd
-      ansible.builtin.service:
-        name: chronyd
-        state: restarted
-        enabled: true
+  #  - name: Enable chronyd
+  #    ansible.builtin.service:
+  #      name: chronyd
+  #      state: restarted
+  #      enabled: true
 
   #  - name: Enable kea-dhcp4-server
   #    ansible.builtin.service:

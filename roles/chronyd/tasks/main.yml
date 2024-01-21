@@ -1,0 +1,16 @@
+---
+# ChronyD configuration files
+- name: write chrony.conf (timeserver) using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.management.db.j2
+    dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+
+- name: Enable service chronyd
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+    enabled: true

@@ -1,0 +1,62 @@
+---
+# Bind9 DNS Server configs
+- name: write bind/named.conf using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.named.conf.j2
+    dest: /etc/bind/named.conf
+
+
+- name: write bind/named.conf.options using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+
+- name: write bind/named.conf.options using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+
+- name: write bind/{{ VLAN1DNS_DOMAIN }} using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.primary.db.j2
+    dest: /etc/bind/{{ VLAN1DNS_DOMAIN }}
+
+- name: write bind/{{ VLAN2DNS_DOMAIN }} using jinja2
+   ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.guest.db.j2
+    dest: /etc/bind/{{ VLAN2DNS_DOMAIN }}
+
+- name: write bind/{{ VLAN5DNS_DOMAIN }} using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: bind.management.db.j2
+    dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+
+- name: Enable bind9
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+    enabled: true
