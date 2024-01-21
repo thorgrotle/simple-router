@@ -1,0 +1,73 @@
+---
+# Firewall zone files:
+- name: write firewalld-zone public config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-public.j2
+    dest: /etc/firewalld/zones/public.xml
+
+- name: write firewalld-zone primary config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-primary.j2
+    dest: /etc/firewalld/zones/primary.xml
+
+- name: write firewalld-zone Guest config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-guest.j2
+    dest: /etc/firewalld/zones/guest.xml
+
+- name: write firewalld-zone IoT config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-IoT.j2
+    dest: /etc/firewalld/zones/IoT.xml
+
+- name: write firewalld-zone plex config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-plex.j2
+    dest: /etc/firewalld/zones/plex.xml
+
+- name: write firewalld-zone Management config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-zone-management.j2
+    dest: /etc/firewalld/zones/management.xml
+
+# Firewall policy files:
+- name: write firewalld-policies for internet access config using jinja2
+  ansible.builtin.template:
+    backup: true
+    mode: 0644
+    owner: root
+    group: root
+    src: firewalld-policies-internet-access.j2
+    dest: /etc/firewalld/policies/internet-access.xml
+
+# Restart service Firewalld
+- name: Enable firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
+    enabled: true
+
