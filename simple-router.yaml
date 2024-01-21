@@ -4,11 +4,11 @@
 # Software Install: ISC-DHCP-Server, Bind9, FirewallD, NTPD, Vlan, bridge-utils, Wireguard, Cockpit, Nano, neofetch, unattended-upgrades
 # Software removal: UFW
 # Setup Network: Netplan
-# Setup ISC-DHCP-Server
+# Setup Kea-dhcp4
 # Setup FirewallD + Vlans
-# Setup NTPD
+# Setup Chronyd
 # Setup Bind9 DNS
-# Setup Wireguard 
+
 
 
 # LINK: https://docs.google.com/document/d/1H9k0OmNg4hu56rrRG1ByQGwBKLNvZfPwkRpv3Ihqecs/edit
@@ -20,7 +20,8 @@
   become_method: sudo
   roles:
   - packages
-#  - kea-dhcp
+  - kea-dhcp
+  
   vars:
     INTERNET_NIC: enp1s0
     BRIDGE_NIC: enx00249b5100e0
@@ -157,14 +158,14 @@
 
 
 
-    - name: write kea-dhcp.conf config using jinja2
-      ansible.builtin.template:
-        backup: true
-        mode: 0644
-        owner: root
-        group: root
-        src: kea-dhcp4.multi.conf.j2
-        dest: /etc/kea/kea-dhcp4.conf
+#    - name: write kea-dhcp.conf config using jinja2
+#      ansible.builtin.template:
+#        backup: true
+#        mode: 0644
+#        owner: root
+#        group: root
+#        src: kea-dhcp4.multi.conf.j2
+#        dest: /etc/kea/kea-dhcp4.conf
 
 #    - name: write default/isc-dhcp-server for DHCP access to all networks
 #      ansible.builtin.template:
