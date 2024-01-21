@@ -18,6 +18,8 @@
 - hosts: 10.0.75.161
   become: yes
   become_method: sudo
+  roles:
+    vars
 #  vars:
 #    INTERNET_NIC: enp1s0
 #    BRIDGE_NIC: enx00249b5100e0
