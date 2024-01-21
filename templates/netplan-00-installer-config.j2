@@ -1,7 +1,8 @@
 # Ansible defined configuration
 network:
   version: 2
-  renderer: NetworkManager
+  #renderer: NetworkManager
+  renderer: networkd
   ethernets:
     {{ BRIDGE_NIC }}: 
       addresses: [{{ VLAN1DHCP_IP }}/24]
