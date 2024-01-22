@@ -5,20 +5,20 @@ network:
   renderer: networkd
   ethernets:
     {{ BRIDGE_NIC }}: {}
-#      addresses: [{{ VLAN1DHCP_IP }}/24]
+      addresses: [{{ VLAN1DHCP_IP }}/24]
 
     {{ INTERNET_NIC }}:
       dhcp4: yes
 
 #  bridges:
-#    lan0:
+#   lan0:
 #      interfaces: [{{BRIDGE_NIC}}]
 #      dhcp4: no
 
   vlans:
-    {{ VLAN1NAME }}:
-      id: {{ VLAN1 }}
-      link: {{ BRIDGE_NIC }}
+ #   {{ VLAN1NAME }}:
+ #     id: {{ VLAN1 }}
+ #     link: {{ BRIDGE_NIC }}
       addresses: [{{ VLAN1DHCP_IP }}/24]
     {{ VLAN2NAME }}:
       id: {{ VLAN2 }}
