@@ -10,16 +10,11 @@
 # Setup Bind9 DNS
 
 
-
-# LINK: https://docs.google.com/document/d/1H9k0OmNg4hu56rrRG1ByQGwBKLNvZfPwkRpv3Ihqecs/edit
-
-
 #name: Simple Router Complete installer
 - hosts: 10.0.75.161
   become: yes
   become_method: sudo
   tasks:
-    #- name: Run the equivalent of "apt update" as a separate step
     - name: "Set timezone"
       timezone:
         name: "{{ TIMEZONE }}"
