@@ -25,28 +25,24 @@
                 {
                 "subnet": "{{ VLAN2SUBNET }}/24",
                 "id": 2,
-#                "pools": [ { "pool": "10.0.25.150 - 10.0.25.200" } ], "option-data": [ { "name": "routers", "data": "10.0.25.1" }, { "name": "domain-name-servers", "data": "10.0.25.1" }, { "name": "domain-name", "data": "guest.lan" }  ] }
                 "pools": [ { "pool": "{{  VLAN2DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN2DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN2DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN2DNS_DOMAIN }}" }, { "name": "ntp-servers", "data": "{{ VLAN2DNS_NTP }}" }  ] }
                 ,
 
                 {
                 "subnet": "{{ VLAN3SUBNET }}/24",
                 "id": 3,
-#                "pools": [ { "pool": "10.0.26.150 - 10.0.26.200" } ], "option-data": [ { "name": "routers", "data": "10.0.26.1" }, { "name": "domain-name-servers", "data": "10.0.26.1" }, { "name": "domain-name", "data": "IoT.lan" }  ] }
                 "pools": [ { "pool": "{{  VLAN3DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN3DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN3DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN3DNS_DOMAIN }}" }, { "name": "ntp-servers", "data": "{{ VLAN3DNS_NTP }}" }  ] }
                 ,
 
                 {
                 "subnet": "{{ VLAN4SUBNET }}/24",
                 "id": 4,
-#                "pools": [ { "pool": "10.0.27.150 - 10.0.27.200" } ], "option-data": [ { "name": "routers", "data": "10.0.27.1" }, { "name": "domain-name-servers", "data": "10.0.27.1" }, { "name": "domain-name", "data": "Plex.lan" }  ] }
                 "pools": [ { "pool": "{{  VLAN4DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN4DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN4DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN4DNS_DOMAIN }}" }, { "name": "ntp-servers", "data": "{{ VLAN4DNS_NTP }}" }  ] }
                 ,
 
                 {
                 "subnet": "{{ VLAN5SUBNET }}/24",
                 "id": 5,
-#                "pools": [ { "pool": "10.0.28.150 - 10.0.28.200" } ], "option-data": [ { "name": "routers", "data": "10.0.28.1" }, { "name": "domain-name-servers", "data": "10.0.28.1" }, { "name": "domain-name", "data": "Management.lan" }  ] }
                 "pools": [ { "pool": "{{  VLAN5DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN5DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN5DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN5DNS_DOMAIN }}" }, { "name": "ntp-servers", "data": "{{ VLAN5DNS_NTP }}" }  ] }
 
 
