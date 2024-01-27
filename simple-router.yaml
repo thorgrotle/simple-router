@@ -36,10 +36,6 @@
 
     - name: "Update Grub - 2"
       command: "update-grub"
-
-
-
-  
   
   roles:
   - packages
