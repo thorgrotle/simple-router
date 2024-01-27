@@ -19,6 +19,7 @@
     - traceroute
     - openvswitch-switch-dpdk
     - network-manager
+    - csvtool
 
 - name: Remove UFW
   ansible.builtin.apt:
