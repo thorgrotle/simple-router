@@ -4,8 +4,8 @@ network:
   #renderer: NetworkManager
   renderer: networkd
   ethernets:
-    {{ BRIDGE_NIC }}:
-      addresses: [{{ VLAN1DHCP_IP }}/24]
+    {{ BRIDGE_NIC }}:{}
+#      addresses: [{{ VLAN1DHCP_IP }}/24]
 
     {{ INTERNET_NIC }}:
       dhcp4: yes
@@ -16,10 +16,10 @@ network:
 #      dhcp4: no
 
   vlans:
- #   {{ VLAN1NAME }}:
- #     id: {{ VLAN1 }}
- #     link: {{ BRIDGE_NIC }}
- #     addresses: [{{ VLAN1DHCP_IP }}/24]
+    {{ VLAN1NAME }}:
+      id: {{ VLAN1 }}
+      link: {{ BRIDGE_NIC }}
+      addresses: [{{ VLAN1DHCP_IP }}/24]
     {{ VLAN2NAME }}:
       id: {{ VLAN2 }}
       link: {{ BRIDGE_NIC }}
