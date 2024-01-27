@@ -125,14 +125,14 @@
 
     
 #  rndc
- #    - name: Copy bind/rndc.key to dhcp/rndc.key
- #      ansible.builtin.copy:
- #        remote_src: true
- #        src: /etc/bind/rndc.key
- #        dest: /etc/dhcp/rndc.key
- #        owner: root
- #        group: root
- #        mode: '0640'
+    - name: Copy bind/rndc.key to kea/rndc.key
+      ansible.builtin.copy:
+         remote_src: true
+         src: /etc/bind/rndc.key
+         dest: /etc/kea/rndc.key
+         owner: root
+         group: root
+         mode: '0640'
 
 
 

@@ -5,7 +5,7 @@
    mode: 0644
    owner: root
    group: root
-   src: kea-dhcp4.multi.conf.j2
+   src: kea-dhcp4.multi.dns.conf.j2
    dest: /etc/kea/kea-dhcp4.conf
 
 # Restart service kera-dhcp4-server
