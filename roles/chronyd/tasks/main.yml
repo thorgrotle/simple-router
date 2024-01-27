@@ -6,8 +6,8 @@
     mode: 0644
     owner: root
     group: root
-    src: bind.management.db.j2
-    dest: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
 
 - name: Enable service chronyd
   ansible.builtin.service:
