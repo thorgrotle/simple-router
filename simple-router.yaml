@@ -26,6 +26,18 @@
     - name: "update hostnames"
       hostname:
         name: "{{ HOST_NAME }}"
+    
+    - name: "Update Grub - 1"
+      ansible.builtin.blockinfile:
+        path: /etc/default/grub
+        block: |
+          GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1"
+          GRUB_CMDLINE_LINUX="ipv6.disable=1"
+
+    - name: "Update Grub - 2"
+      raw: "update-grub"
+
+
 
   
   
@@ -43,7 +55,7 @@
     TIMEZONE: "Europe/Copenhagen"
 
     #
-    VLAN1: 24
+    VLAN1: 1
     VLAN1NAME: Primary
     VLAN1DHCP_IP: 10.0.24.1
     VLAN1SUBNET: 10.0.24.0
