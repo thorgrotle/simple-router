@@ -47,6 +47,7 @@
   - firewalld
   - kea-dhcp
   - bind9
+  - chronyd
 
   vars:
     INTERNET_NIC: enp1s0
