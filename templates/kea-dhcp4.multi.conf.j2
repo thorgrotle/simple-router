@@ -19,7 +19,7 @@
                 {
                 "subnet": "{{ VLAN1SUBNET }}/24",
                 "id": 1,
-                "pools": [ { "pool": "{{ VLAN1DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN1DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN1DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN1DNS_DOMAIN }}" }  ] }
+                "pools": [ { "pool": "{{ VLAN1DHCP_RANGE }}" } ], "option-data": [ { "name": "routers", "data": "{{ VLAN1DHCP_IP }}" }, { "name": "domain-name-servers", "data": "{{ VLAN1DNS_INTERNAL }}" }, { "name": "domain-name", "data": "{{ VLAN1DNS_DOMAIN }}" }, { "name": "ntp-servers", "data": "{{ VLAN1DNS_NTP }}" }  ] }
                 ,
 
                 {
