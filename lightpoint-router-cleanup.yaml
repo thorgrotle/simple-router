@@ -14,13 +14,6 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: "Set timezone"
-      timezone:
-        name: "{{ TIMEZONE }}"
-
-    - name: APT update
-      ansible.builtin.apt:
-        update_cache: true
 
     - name: Disable firewalld
       ansible.builtin.service:
@@ -41,9 +34,9 @@
         enabled: false
 
       - name: Disable chronyd
-      ansible.builtin.service:
+        ansible.builtin.service:
         name: chronyd
         state: stopped
         enabled: false     
-#  roles:
-#    - delete-confs
+  roles:
+    - delete-confs

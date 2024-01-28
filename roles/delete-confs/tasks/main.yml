@@ -4,69 +4,71 @@
     path: /etc/firewalld/zones/public.xml
     state: absent
 
-    - name: Delete firewalld-zone primary 
-      ansible.builtin.file:
-        path: /etc/firewalld/zones/primary.xml
+- name: Delete firewalld-zone primary 
+  ansible.builtin.file:
+    path: /etc/firewalld/zones/primary.xml
 
-    - name: Deletee firewalld-zone Guest 
-        ansible.builtin.file:
-        path: /etc/firewalld/zones/guest.xml
-        state: absent
-
-
-    - name: Delete firewalld-zone IoT
-      ansible.builtin.file:
-        path: /etc/firewalld/zones/IoT.xml
-        state: absent
-
-    - name: Delete firewalld-zone plex 
-      ansible.builtin.file:
-        path: /etc/firewalld/zones/plex.xml
-        state: absent
+- name: Deletee firewalld-zone Guest 
+  ansible.builtin.file:
+    path: /etc/firewalld/zones/guest.xml
+    state: absent
 
 
-    - name: Delete firewalld-zone Management 
-      ansible.builtin.file:
-        path: /etc/firewalld/zones/management.xml
-        state: absent
+- name: Delete firewalld-zone IoT
+  ansible.builtin.file:
+    path: /etc/firewalld/zones/IoT.xml
+    state: absent
+
+- name: Delete firewalld-zone plex 
+  ansible.builtin.file:
+    path: /etc/firewalld/zones/plex.xml
+    state: absent
 
 
-    - name: Delete firewalld-policies for internet access
-      ansible.builtin.file:
-        path: /etc/firewalld/policies/internet-access.xml
-        state: absent
+- name: Delete firewalld-zone Management 
+  ansible.builtin.file:
+    path: /etc/firewalld/zones/management.xml
+    state: absent
 
-    - name: delete bind/named.conf using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/named.conf
-        state: absent
 
-    - name: delete bind/named.conf.options using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/named.conf.local
-        state: absent
+- name: Delete firewalld-policies for internet access
+  ansible.builtin.file:
+    path: /etc/firewalld/policies/internet-access.xml
+    state: absent
 
-    - name: Delete bind/named.conf.options using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/named.conf.options
-        state: absent
+- name: delete bind/named.conf using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/named.conf
+    state: absent
 
-    - name: Delete bind/{{ VLAN1DNS_DOMAIN }} using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/{{ VLAN1DNS_DOMAIN }}
-        state: absent
+- name: delete bind/named.conf.options using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/named.conf.local
+    state: absent
 
-    - name: Delete bind/{{ VLAN2DNS_DOMAIN }} using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/{{ VLAN2DNS_DOMAIN }}
+- name: Delete bind/named.conf.options using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/named.conf.options
+    state: absent
 
-    - name: Delete bind/{{ VLAN5DNS_DOMAIN }} using jinja2
-      ansible.builtin.file:
-        path: /etc/bind/{{ VLAN5DNS_DOMAIN }}
-        state: absent
+- name: Delete bind/{{ VLAN1DNS_DOMAIN }} using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/{{ VLAN1DNS_DOMAIN }}
+    state: absent
+
+
+- name: Delete bind/{{ VLAN2DNS_DOMAIN }} using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/{{ VLAN2DNS_DOMAIN }}
+    state: absent
+
+- name: Delete bind/{{ VLAN5DNS_DOMAIN }} using jinja2
+  ansible.builtin.file:
+    path: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+    state: absent
    
-    - name: delete kea-dhcp4.conf
-      ansible.builtin.file:
-        path: /etc/kea/kea-dhcp4.conf
-        state: absent
+- name: delete kea-dhcp4.conf
+  ansible.builtin.file:
+    path: /etc/kea/kea-dhcp4.conf
+    state: absent
 
