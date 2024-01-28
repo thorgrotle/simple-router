@@ -4,8 +4,8 @@ network:
   #renderer: NetworkManager
   renderer: networkd
   ethernets:
-    {{ BRIDGE_NIC }}: {}
-#      addresses: [{{ VLAN1DHCP_IP }}/24]
+    {{ BRIDGE_NIC }}:
+      addresses: [{{ VLAN1DHCP_IP }}/24]
 
     {{ INTERNET_NIC }}:
       dhcp4: yes
