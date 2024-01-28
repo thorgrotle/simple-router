@@ -45,5 +45,5 @@
         name: chronyd
         state: stopped
         enabled: false     
-  roles:
-    - delete-confs
+#  roles:
+#    - delete-confs
