@@ -14,7 +14,6 @@
   become: yes
   become_method: sudo
   tasks:
-
     - name: Disable firewalld
       ansible.builtin.service:
         name: firewalld
@@ -33,11 +32,10 @@
         state: stopped
         enabled: false
 
-      - name: Disable chronyd
-        ansible.builtin.service:
-          name: chronyd
-          state: stopped
-          enabled: false     
+    - name: Disable chronyd
+      ansible.builtin.service:
+       name: chronyd
+       state: stopped
+       enabled: false     
   roles:
-
     - delete-confs
