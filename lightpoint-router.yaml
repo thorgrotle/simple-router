@@ -34,8 +34,8 @@
           GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1, console=ttyS0,115200n8""
           GRUB_CMDLINE_LINUX="ipv6.disable=1,"
 
-    - name: "Update Grub - 2"
-      command: "update-grub"
+#    - name: "Update Grub - 2"
+#      command: "update-grub"
 
   #  rndc
     - name: Copy bind/rndc.key to kea/rndc.key
