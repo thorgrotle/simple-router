@@ -34,8 +34,9 @@
 
     - name: Disable chronyd
       ansible.builtin.service:
-       name: chronyd
-       state: stopped
-       enabled: false     
-  roles:
-    - delete-confs
+        name: chronyd
+        state: stopped
+        enabled: false
+  #roles:
+  #  - disable-service
+  #  - delete-confs
