@@ -54,9 +54,6 @@
         state: stopped
         enabled: false
 
-# Delete files
-
-    # Firewall zone files:
     - name: Delete firewalld-zone public
       ansible.builtin.file:
         path: /etc/firewalld/zones/public.xml
@@ -76,7 +73,6 @@
       ansible.builtin.file:
         path: /etc/firewalld/zones/IoT.xml
         state: absent
-
 
     - name: Delete firewalld-zone plex 
       ansible.builtin.file:
@@ -136,6 +132,4 @@
       ansible.builtin.file:
         path: /etc/kea/kea-dhcp4.conf
         state: absent
-      
 
-dest: /etc/kea/kea-dhcp4.conf
