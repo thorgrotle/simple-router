@@ -1,0 +1,113 @@
+---
+# This ansible cookbook will setup full routerstack which consist of:
+# Base ubuntu installer: 
+# Software Install: ISC-DHCP-Server, Bind9, FirewallD, NTPD, Vlan, bridge-utils, Wireguard, Cockpit, Nano, neofetch, unattended-upgrades
+# Software removal: UFW
+# Setup Network: Netplan
+# Setup Kea-dhcp4
+# Setup FirewallD + Vlans
+# Setup Chronyd
+# Setup Bind9 DNS
+
+
+#name: Simple Router Complete installer
+- hosts: 10.0.75.161
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Set timezone"
+      timezone:
+        name: "{{ TIMEZONE }}"
+
+    - name: APT update
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: "update hostnames"
+      hostname:
+        name: "{{ HOST_NAME }}"
+    
+    - name: "Update Grub - 1"
+      ansible.builtin.blockinfile:
+        path: /etc/default/grub
+        block: |
+          GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1"
+          GRUB_CMDLINE_LINUX="ipv6.disable=1"
+
+    - name: "Update Grub - 2"
+      command: "update-grub"
+
+  #  rndc
+    - name: Copy bind/rndc.key to kea/rndc.key
+      ansible.builtin.copy:
+         remote_src: true
+         src: /etc/bind/rndc.key
+         dest: /etc/kea/rndc.key
+         owner: root
+         group: root
+         mode: '0640'
+
+  
+  roles:
+  - packages
+  - network
+  - firewalld
+  - kea-dhcp
+  - bind9
+  - chronyd
+
+  vars:
+    INTERNET_NIC: enp1s0
+    BRIDGE_NIC: enx00249b5100e0
+    HOST_NAME: rey
+    TIMEZONE: "Europe/Copenhagen"
+
+    
+
+
+
+# Point to public zone as default
+#    - name: Set default zone
+#      ansible.builtin.lineinfile:
+#        path: /etc/firewalld/firewalld.conf
+#        line: "DefaultZone=Internet0"
+
+ 
+
+
+
+
+
+
+
+# Variables
+
+
+# ISC-DHCP-Server, Bind9, FirewallD, NTPD, Vlan, bridge-utils, Wireguard, Cockpit, Nano, neofetch, unattended-upgrades
+
+
+# REMOVE UFW
+
+
+
+
+# Copy in template files from JINJA2 - CREATE FOLDERS Set permissions
+#  - /etc/sysctl.conf
+#  - /etc/modules
+#  - /etc/netplan/00-installer-config.yaml
+#  - /etc/firewalld/firewalld.conf
+#  - /etc/firewalld/zones/work.xml
+#  - /etc/firewalld/zones/public.xml
+#  - /etc/firewalld/policies/internet-access.xml
+#  - /etc/bind/named.conf
+#  - /etc/bind/named.conf.options
+#  - /etc/bind/named.conf.local 
+#  - /etc/bind/db.lan
+#  - /etc/dhcp/dhcpd.conf
+#  - /etc/default/isc-dhcp-server
+#  - /etc/ntp/ntpd.conf
+#  - /etc/cockpit/cockpit.conf
+#  - /etc/wireguard/wg0.conf 
+#  - /etc/apt/apt.conf.d/50unattended-upgrades
+#  - /etc/apt/apt.conf.d/10periodic
+
