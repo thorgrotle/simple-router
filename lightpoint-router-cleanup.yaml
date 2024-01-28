@@ -39,14 +39,11 @@
         name: kea-dhcp6-server
         state: stopped
         enabled: false
-    - name: Disable Bind9
-      ansible.builtin.service:
-        name: bind9
-        state: stopped
-        enabled: false
 
-    - name: Disable chronyd
+      - name: Disable chronyd
       ansible.builtin.service:
         name: chronyd
         state: stopped
         enabled: false     
+  roles:
+    - delete-confs
