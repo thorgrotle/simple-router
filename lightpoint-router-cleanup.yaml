@@ -111,3 +111,18 @@
       ansible.builtin.file:
         path: /etc/kea/kea-dhcp4.conf
         state: absent
+
+    - name: Recursively remove kea directory
+      ansible.builtin.file:
+        path: /var/lib/kea
+        state: absent
+
+    - name: Recursively remove chrony directory
+      ansible.builtin.file:
+        path: /var/lib/chrony
+        state: absent
+
+    - name: Recursively remove bind directory
+      ansible.builtin.file:
+        path: /var/lib/bind
+        state: absent
