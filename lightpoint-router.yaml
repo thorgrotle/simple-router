@@ -1,0 +1,160 @@
+---
+# This ansible cookbook will setup full routerstack which consist of:
+# Base ubuntu installer: 
+# Software Install: ISC-DHCP-Server, Bind9, FirewallD, NTPD, Vlan, bridge-utils, Wireguard, Cockpit, Nano, neofetch, unattended-upgrades
+# Software removal: UFW
+# Setup Network: Netplan
+# Setup Kea-dhcp4
+# Setup FirewallD + Vlans
+# Setup Chronyd
+# Setup Bind9 DNS
+
+
+#name: Simple Router Complete installer
+- hosts: 10.0.77.20
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Set timezone"
+      timezone:
+        name: "{{ TIMEZONE }}"
+
+    - name: APT update
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: "update hostnames"
+      hostname:
+        name: "{{ HOST_NAME }}"
+    
+    - name: "Update Grub - 1"
+      ansible.builtin.blockinfile:
+        path: /etc/default/grub
+        block: |
+          GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1"
+          GRUB_CMDLINE_LINUX="ipv6.disable=1"
+
+    - name: "Update Grub - 2"
+      command: "update-grub"
+  
+  roles:
+  - packages
+  - network
+  - firewalld
+  - kea-dhcp
+  - bind9
+  - chronyd
+
+  #vars:
+  #  INTERNET_NIC: enp1s0
+  #  BRIDGE_NIC: enx00249b5100e0
+  #  HOST_NAME: rey
+  #  TIMEZONE: "Europe/Copenhagen"
+#
+    #
+#    VLAN1: 1
+#    VLAN1NAME: Primary
+#    VLAN1DHCP_IP: 10.0.24.1
+#    VLAN1SUBNET: 10.0.24.0
+#    VLAN1DHCP_RANGE: "10.0.24.30 - 10.0.24.200"
+#    VLAN1DNS_DOMAIN: primary.lan
+#    VLAN1DNS_INTERNAL: 8.8.8.8
+#    VLAN1DNS_EXTERNAL1: 1.1.1.1
+#    VLAN1DNS_EXTERNAL2: 8.8.8.8
+#    VLAN1DNS_ROUTER: 10.0.24.1
+#    VLAN1SERVICES: "DNS SSH"
+#    VLAN1DNS_NTP: 10.0.24.1
+#
+#    #
+#    VLAN2: 25
+#    VLAN2NAME: Guest
+#    VLAN2DHCP_IP: 10.0.25.1
+#    VLAN2SUBNET: 10.0.25.0
+#    VLAN2DHCP_RANGE: "10.0.25.10 - 10.0.25.100"
+#    VLAN2DNS_DOMAIN: guest.lan
+#    VLAN2DNS_INTERNAL: 8.8.8.8
+#    VLAN2DNS_EXTERNAL1: 8.8.8.8
+#    VLAN2DNS_EXTERNAL2: 8.8.8.8
+#    VLAN2DNS_ROUTER: 10.0.25.1
+#    VLAN2SERVICES:
+#    VLAN2DNS_NTP: 10.0.25.1
+#    #
+#
+#    VLAN3: 26
+#    VLAN3NAME: IoT
+#    VLAN3DHCP_IP: 10.0.26.1
+#    VLAN3SUBNET: 10.0.26.0
+#    VLAN3DHCP_RANGE: "10.0.26.10 - 10.0.26.100"
+#    VLAN3DNS_DOMAIN: IoT.lan
+#    VLAN3DNS_INTERNAL: 8.8.8.8
+#    VLAN3DNS_EXTERNAL1: 8.8.8.8
+#    VLAN3DNS_EXTERNAL2: 8.8.8.8
+#    VLAN3DNS_ROUTER: 10.0.26.1
+#    VLAN3SERVICES:
+#    VLAN3DNS_NTP: 10.0.26.1
+#    #
+
+
+#    VLAN4: 27
+#    VLAN4NAME: Plex
+#    VLAN4DHCP_IP: 10.0.27.1
+#    VLAN4SUBNET: 10.0.27.0
+#    VLAN4DHCP_RANGE: "10.0.27.10 - 10.0.27.15"
+#    VLAN4DNS_DOMAIN: plex.lan
+#    VLAN4DNS_INTERNAL: 8.8.8.8
+#    VLAN4DNS_EXTERNAL1: 8.8.8.8
+#    VLAN4DNS_EXTERNAL2: 8.8.8.8
+#    VLAN4DNS_ROUTER: 10.0.27.1
+#    VLAN4SERVICES:
+#    VLAN4DNS_NTP: 10.0.27.1
+    #
+
+#    VLAN5: 28
+#    VLAN5NAME: Management
+#    VLAN5DHCP_IP: 10.0.28.1
+#    VLAN5SUBNET: 10.0.28.0
+#    VLAN5DHCP_RANGE: "10.0.28.10 - 10.0.28.100"
+#    VLAN5DNS_DOMAIN: management.lan
+#    VLAN5DNS_INTERNAL: 8.8.8.8
+#    VLAN5DNS_EXTERNAL1: 8.8.8.8
+#    VLAN5DNS_EXTERNAL2: 8.8.8.8
+#    VLAN5DNS_ROUTER: 10.0.28.1
+#    VLAN5SERVICES:
+#    VLAN5DNS_NTP: 10.0.27.1
+#    #
+
+    
+# Point to public zone as default
+#    - name: Set default zone
+#      ansible.builtin.lineinfile:
+#        path: /etc/firewalld/firewalld.conf
+#        line: "DefaultZone=Internet0"
+
+ 
+
+
+
+
+
+
+
+# Copy in template files from JINJA2 - CREATE FOLDERS Set permissions
+#  - /etc/sysctl.conf
+#  - /etc/modules
+#  - /etc/netplan/00-installer-config.yaml
+#  - /etc/firewalld/firewalld.conf
+#  - /etc/firewalld/zones/work.xml
+#  - /etc/firewalld/zones/public.xml
+#  - /etc/firewalld/policies/internet-access.xml
+#  - /etc/bind/named.conf
+#  - /etc/bind/named.conf.options
+#  - /etc/bind/named.conf.local 
+#  - /etc/bind/db.lan
+#  - /etc/dhcp/dhcpd.conf
+#  - /etc/default/isc-dhcp-server
+#  - /etc/ntp/ntpd.conf
+#  - /etc/cockpit/cockpit.conf
+#  - /etc/wireguard/wg0.conf 
+#  - /etc/apt/apt.conf.d/50unattended-upgrades
+#  - /etc/apt/apt.conf.d/10periodic
+
