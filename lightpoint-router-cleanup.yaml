@@ -1,0 +1,141 @@
+---
+# This ansible cookbook will setup full routerstack which consist of:
+# Base ubuntu installer: 
+# Software Install: ISC-DHCP-Server, Bind9, FirewallD, NTPD, Vlan, bridge-utils, Wireguard, Cockpit, Nano, neofetch, unattended-upgrades
+# Software removal: UFW
+# Setup Network: Netplan
+# Setup Kea-dhcp4
+# Setup FirewallD + Vlans
+# Setup Chronyd
+# Setup Bind9 DNS
+
+
+#name: Simple Router Complete installer
+- hosts: 10.0.77.20
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Set timezone"
+      timezone:
+        name: "{{ TIMEZONE }}"
+
+    - name: APT update
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Disable firewalld
+      ansible.builtin.service:
+        name: firewalld
+        state: stopped
+        enabled: false
+
+    - name: Disable Kea DHCP
+      ansible.builtin.service:
+        name: kea-dhcp4-server
+        state: stopped
+        enabled: false
+
+    - name: Disable Kea DHCP6
+      ansible.builtin.service:
+        name: kea-dhcp6-server
+        state: stopped
+        enabled: false
+
+
+    - name: Disable Bind9
+      ansible.builtin.service:
+        name: bind9
+        state: stopped
+        enabled: false
+
+    - name: Disable chronyd
+      ansible.builtin.service:
+        name: chronyd
+        state: stopped
+        enabled: false
+
+# Delete files
+
+    # Firewall zone files:
+    - name: Delete firewalld-zone public
+      ansible.builtin.file:
+        path: /etc/firewalld/zones/public.xml
+        state: absent
+
+    - name: Delete firewalld-zone primary 
+      ansible.builtin.file:
+        path: /etc/firewalld/zones/primary.xml
+
+    - name: Deletee firewalld-zone Guest 
+        ansible.builtin.file:
+        path: /etc/firewalld/zones/guest.xml
+        state: absent
+
+
+    - name: Delete firewalld-zone IoT
+      ansible.builtin.file:
+        path: /etc/firewalld/zones/IoT.xml
+        state: absent
+
+
+    - name: Delete firewalld-zone plex 
+      ansible.builtin.file:
+        path: /etc/firewalld/zones/plex.xml
+        state: absent
+
+
+    - name: Delete firewalld-zone Management 
+      ansible.builtin.file:
+        path: /etc/firewalld/zones/management.xml
+        state: absent
+
+
+    # Firewall policy files:
+    - name: Delete firewalld-policies for internet access
+      ansible.builtin.file:
+        path: /etc/firewalld/policies/internet-access.xml
+        state: absent
+
+
+    # Bind9 DNS Server configs
+    - name: delete bind/named.conf using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/named.conf
+        state: absent
+
+
+
+    - name: delete bind/named.conf.options using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/named.conf.local
+        state: absent
+
+    - name: Delete bind/named.conf.options using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/named.conf.options
+        state: absent
+
+    - name: Delete bind/{{ VLAN1DNS_DOMAIN }} using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/{{ VLAN1DNS_DOMAIN }}
+        state: absent
+
+    - name: Delete bind/{{ VLAN2DNS_DOMAIN }} using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/{{ VLAN2DNS_DOMAIN }}
+
+    - name: Delete bind/{{ VLAN5DNS_DOMAIN }} using jinja2
+      ansible.builtin.file:
+        path: /etc/bind/{{ VLAN5DNS_DOMAIN }}
+        state: absent
+      
+
+
+
+    - name: delete kea-dhcp4.conf
+      ansible.builtin.file:
+        path: /etc/kea/kea-dhcp4.conf
+        state: absent
+      
+
+dest: /etc/kea/kea-dhcp4.conf
